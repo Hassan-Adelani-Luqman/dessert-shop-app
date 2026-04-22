@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Component, inject } from '@angular/core';
+import { ProductService } from '../../services/product.service';
 import { ProductCardComponent } from '../product-card/product-card';
 
 @Component({
@@ -9,5 +9,5 @@ import { ProductCardComponent } from '../product-card/product-card';
   templateUrl: './product-list.html',
 })
 export class ProductListComponent {
-  products = input.required<Product[]>();
+  productService = inject(ProductService);
 }

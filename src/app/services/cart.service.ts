@@ -1,8 +1,13 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { CartItem, Product } from '../models/product.model';
+import { LoggingService } from './logging.service';
+import { UtilityService } from './utility.service';
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
+  private logging = inject(LoggingService);
+  private utility = inject(UtilityService);
+
   items = signal<CartItem[]>([]);
 
   totalItems = computed(() =>
@@ -10,7 +15,9 @@ export class CartService {
   );
 
   orderTotal = computed(() =>
-    this.items().reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+    this.utility.calculateTotal(
+      this.items().map((i) => ({ price: i.product.price, quantity: i.quantity }))
+    )
   );
 
   addItem(product: Product): void {
@@ -25,10 +32,13 @@ export class CartService {
     } else {
       this.items.set([...current, { product, quantity: 1 }]);
     }
+    this.logging.action('add_to_cart', { productId: product.id, name: product.name });
   }
 
   removeItem(productId: number): void {
+    const item = this.items().find((i) => i.product.id === productId);
     this.items.set(this.items().filter((i) => i.product.id !== productId));
+    this.logging.action('remove_from_cart', { productId, name: item?.product.name });
   }
 
   updateQuantity(productId: number, quantity: number): void {
@@ -41,6 +51,7 @@ export class CartService {
         i.product.id === productId ? { ...i, quantity } : i
       )
     );
+    this.logging.action('update_quantity', { productId, quantity });
   }
 
   getQuantity(productId: number): number {
@@ -48,6 +59,7 @@ export class CartService {
   }
 
   clearCart(): void {
+    this.logging.action('clear_cart', { itemCount: this.items().length });
     this.items.set([]);
   }
 }
