@@ -1,6 +1,6 @@
 # Dessert Shop App
 
-An Angular application that demonstrates core Angular concepts through a fully functional dessert e-commerce experience. Built across two progressive lab modules.
+An Angular application that demonstrates core Angular concepts through a fully functional dessert e-commerce experience.
 
 **Live Demo:** https://comforting-gecko-00d0c5.netlify.app/
 
@@ -175,24 +175,6 @@ The app is deployed on **Netlify**.
 - Publish directory: `dist/dessert-shop-app/browser`
 - Auto-deploys on every push to the `main` branch.
 
----
-
-## Lab Modules
-
-### Module 1 — Angular Fundamentals
-Built the complete UI and cart functionality using standalone components, signals, `@for`/`@if` control flow, and component communication via inputs and outputs.
-
-### Module 2 — Services & Dependency Injection
-Refactored shared logic into injectable services:
-- Moved product data management into `ProductService`
-- Extracted formatting and calculation helpers into `UtilityService`
-- Added cross-component action tracking with `LoggingService`
-- Demonstrated `providedIn: 'root'` singleton scope
-- Showed how services can be injected into other services (`CartService` → `UtilityService` + `LoggingService`)
-- Achieved full separation of concerns between components and business logic
-
----
-
 ## Running Tests
 
 ```bash
@@ -200,7 +182,3 @@ ng test
 ```
 
 ---
-
-## Author
-
-**Hassan Adelani Luqman** — h.luqman@alustudent.com
