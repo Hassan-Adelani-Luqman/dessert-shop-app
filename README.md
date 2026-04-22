@@ -1,59 +1,85 @@
-# DessertShopApp Deployed Link: https://beautiful-palmier-5d5c68.netlify.app/
+# Dessert Shop App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
+An Angular application that demonstrates core Angular concepts through a fully functional dessert e-commerce experience.
 
-## Development server
+**Live Demo:** https://beautiful-palmier-5d5c68.netlify.app/
 
-To start a local development server, run:
+---
+
+## About the Project
+
+The Dessert Shop App lets users browse a catalogue of 9 desserts, add items to a cart, adjust quantities, and confirm their order through a modal.
+
+---
+
+## Features
+
+- Browse 9 desserts in a responsive 3-column grid
+- Add items to cart with a single click
+- Increment / decrement quantities directly on each product card
+- Live cart sidebar with running totals
+- Order confirmation modal with a full order summary
+- Carbon-neutral delivery badge
+- Fully responsive — mobile, tablet, and desktop layouts
+
+---
+
+## Tech Stack
+
+| Tool | Version |
+|---|---|
+| Angular | 21 |
+| Tailwind CSS | 4 |
+| TypeScript | 5 |
+| Node.js | 18+ |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18 or later
+- Angular CLI — `npm install -g @angular/cli`
+
+### Installation
+
+```bash
+git clone https://github.com/Hassan-Adelani-luqman/dessert-shop-app.git
+cd dessert-shop-app
+npm install
+```
+
+### Development Server
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Production Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Output is placed in `dist/dessert-shop-app/browser/`.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Deployment
+
+The app is deployed on **Netlify**.
+
+- Build command: `ng build`
+- Publish directory: `dist/dessert-shop-app/browser`
+- Auto-deploys on every push to the `main` branch.
+
+## Running Tests
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
