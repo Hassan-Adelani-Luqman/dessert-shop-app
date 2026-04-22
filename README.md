@@ -2,7 +2,7 @@
 
 An Angular application that demonstrates core Angular concepts through a fully functional dessert e-commerce experience. Built across two progressive lab modules.
 
-**Live Demo:** https://beautiful-palmier-5d5c68.netlify.app/
+**Live Demo:** https://comforting-gecko-00d0c5.netlify.app/
 
 ---
 
