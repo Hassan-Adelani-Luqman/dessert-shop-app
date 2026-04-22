@@ -1,0 +1,94 @@
+<div class="flex flex-col">
+  <!-- Image area with positioned button -->
+  <div class="relative">
+
+    <!-- Image with conditional accent border when in cart -->
+    <div
+      class="rounded-xl overflow-hidden border-2 transition-colors duration-200"
+      [class.border-red]="qty() > 0"
+      [class.border-transparent]="qty() === 0"
+    >
+      <img
+        [src]="product().image"
+        [alt]="product().name"
+        class="w-full aspect-3/2 md:aspect-square object-cover block"
+      />
+    </div>
+
+    <!-- Add to Cart / Quantity control — centered, half-overlapping the image bottom -->
+    <div
+      class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10"
+    >
+      @if (qty() === 0) {
+        <!-- Add to Cart pill button -->
+        <button
+          (click)="add()"
+          class="flex items-center gap-2 bg-white border border-rose-300 rounded-[9999px] px-5 py-2.75 text-sm font-semibold text-rose-900 whitespace-nowrap cursor-pointer hover:border-red hover:text-red transition-colors duration-200"
+        >
+          <img
+            src="assets/icons/carbon_shopping-cart-plus.svg"
+            alt=""
+            class="w-4.5 h-4.5 shrink-0"
+          />
+          Add to Cart
+        </button>
+      } @else {
+        <!-- Quantity controls pill -->
+        <div
+          class="flex items-center gap-5.5 bg-red rounded-[9999px] px-4.5 py-2.75"
+        >
+          <!-- Decrement -->
+          <button
+            (click)="decrement()"
+            aria-label="Decrease quantity"
+            class="w-5 h-5 rounded-[9999px] border border-white flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-red transition-colors duration-200 shrink-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="2"
+              viewBox="0 0 10 2"
+              fill="currentColor"
+            >
+              <rect width="10" height="2" rx="1" />
+            </svg>
+          </button>
+
+          <!-- Quantity number -->
+          <span
+            class="text-white text-sm font-semibold min-w-4 text-center leading-none"
+          >
+            {{ qty() }}
+          </span>
+
+          <!-- Increment -->
+          <button
+            (click)="increment()"
+            aria-label="Increase quantity"
+            class="w-5 h-5 rounded-[9999px] border border-white flex items-center justify-center text-white cursor-pointer hover:bg-white hover:text-red transition-colors duration-200 shrink-0"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              fill="currentColor"
+            >
+              <rect x="4" y="0" width="2" height="10" rx="1" />
+              <rect x="0" y="4" width="10" height="2" rx="1" />
+            </svg>
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Product info — top padding clears the translated button -->
+  <div class="pt-8 pb-1">
+    <p class="text-xs text-rose-500 mb-0.5">{{ product().category }}</p>
+    <p class="text-sm font-semibold text-rose-900 mb-0.5">{{ product().name }}</p>
+    <p class="text-sm font-semibold text-red">
+      {{ product().price | currency : 'USD' : 'symbol' : '1.2-2' }}
+    </p>
+  </div>
+</div>
