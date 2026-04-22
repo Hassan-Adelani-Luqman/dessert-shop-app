@@ -1,4 +1,4 @@
-# DessertShopApp
+# DessertShopApp Deployed Link: https://beautiful-palmier-5d5c68.netlify.app/
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.6.
 
