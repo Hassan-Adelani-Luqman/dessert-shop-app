@@ -1,3 +1,21 @@
+<!-- Task 4: search input and category filter — pushes into ProductService streams -->
+<app-search-bar />
+
+<!-- Task 8: error banner — renders when loadError$ BehaviorSubject is non-null -->
+@if (loadError()) {
+  <div class="border border-red text-red bg-white rounded-xl p-4 mb-6 text-sm font-semibold">
+    {{ loadError() }}
+  </div>
+}
+
+<!-- Empty state when search/filter returns no matches -->
+@if (products().length === 0 && !loadError()) {
+  <p class="text-rose-500 text-sm text-center py-12">
+    No desserts found. Try a different search or category.
+  </p>
+}
+
+<!-- Task 5: products() signal is derived from filteredProducts$ (combineLatest result) -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
   @for (product of products(); track product.id) {
     <app-product-card [product]="product" />

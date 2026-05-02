@@ -1,10 +1,10 @@
 <div class="bg-white rounded-2xl p-6">
-  <!-- Cart heading -->
+  <!-- Cart heading — reads from toSignal() bridge -->
   <h2 class="text-xl font-bold text-red mb-6">
-    Your Cart ({{ cartService.totalItems() }})
+    Your Cart ({{ totalItems() }})
   </h2>
 
-  @if (cartService.items().length === 0) {
+  @if (items().length === 0) {
     <!-- Empty state -->
     <div class="flex flex-col items-center py-6 gap-4">
       <img
@@ -17,9 +17,9 @@
       </p>
     </div>
   } @else {
-    <!-- Items list -->
+    <!-- Items list — iterates the signal derived from items$ BehaviorSubject -->
     <div class="divide-y divide-rose-100">
-      @for (item of cartService.items(); track item.product.id) {
+      @for (item of items(); track item.product.id) {
         <div class="flex items-center justify-between py-4">
           <div class="flex-1 min-w-0 pr-3">
             <p class="text-sm font-semibold text-rose-900 mb-1">
@@ -40,14 +40,14 @@
               </span>
             </div>
           </div>
-          <!-- Remove button: swap icon on hover using group -->
+          <!-- Remove button -->
           <button
             (click)="remove(item.product.id)"
             aria-label="Remove {{ item.product.name }}"
             class="group shrink-0 cursor-pointer"
           >
             <img
-              src="assets/icons/remove_item.svg" 
+              src="assets/icons/remove_item.svg"
               alt=""
               class="w-4 h-4 block group-hover:hidden"
             />
@@ -61,23 +61,30 @@
       }
     </div>
 
-    <!-- Order total -->
+    <!-- Order total — reads from toSignal() bridge -->
     <div class="flex items-center justify-between py-6">
       <span class="text-sm text-rose-900">Order Total</span>
       <span class="text-2xl font-bold text-rose-900">
-        {{ cartService.orderTotal() | currency : 'USD' : 'symbol' : '1.2-2' }}
+        {{ orderTotal() | currency : 'USD' : 'symbol' : '1.2-2' }}
       </span>
     </div>
 
-    <!-- Carbon-neutral delivery badge -->
-    <div
-      class="flex items-center justify-center gap-2 bg-rose-50 rounded-xl py-4 mb-6"
-    >
-      <img src="assets/icons/carbon_tree.svg" alt="" class="w-5 h-5" />
-      <p class="text-sm text-rose-900">
-        This is a <strong>carbon-neutral</strong> delivery
-      </p>
-    </div>
+    <!--
+      Task 7 — async pipe demo:
+      The async pipe subscribes to items$ directly and unsubscribes automatically
+      when CartComponent is destroyed. Compare with toSignal() above — both manage
+      the subscription lifetime, but async pipe works purely in the template.
+    -->
+    @if ((cartService.items$ | async)?.length) {
+      <div
+        class="flex items-center justify-center gap-2 bg-rose-50 rounded-xl py-4 mb-6"
+      >
+        <img src="assets/icons/carbon_tree.svg" alt="" class="w-5 h-5" />
+        <p class="text-sm text-rose-900">
+          This is a <strong>carbon-neutral</strong> delivery
+        </p>
+      </div>
+    }
 
     <!-- Confirm Order button -->
     <button

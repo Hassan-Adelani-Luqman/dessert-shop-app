@@ -1,0 +1,33 @@
+<div class="flex flex-col sm:flex-row gap-3 mb-8">
+  <!--
+    (input) fires on every keystroke → onSearch() pushes into searchTerm$ Subject
+    → debounceTime(300) + distinctUntilChanged() in ProductService process it
+    → combineLatest re-emits → filteredProducts$ updates → product grid re-renders
+  -->
+  <input
+    type="text"
+    placeholder="Search desserts..."
+    (input)="onSearch($any($event.target).value)"
+    class="flex-1 border border-rose-300 rounded-full px-4 py-2.5 text-sm
+           text-rose-900 placeholder:text-rose-400 bg-white
+           focus:outline-none focus:border-red transition-colors duration-200"
+  />
+
+  <!--
+    (change) fires on selection → onCategoryChange() pushes into selectedCategory$
+    BehaviorSubject → combineLatest re-emits immediately (no debounce needed for
+    discrete selections) → filteredProducts$ updates
+  -->
+  <select
+    (change)="onCategoryChange($any($event.target).value)"
+    class="border border-rose-300 rounded-full px-4 py-2.5 text-sm
+           text-rose-900 bg-white focus:outline-none focus:border-red
+           transition-colors duration-200 cursor-pointer"
+  >
+    @for (category of categories(); track category) {
+      <option [value]="category">
+        {{ category === '' ? 'All Categories' : category }}
+      </option>
+    }
+  </select>
+</div>

@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { PRODUCTS } from './data/products.data';
 import { CartService } from './services/cart.service';
 import { CartComponent } from './components/cart/cart';
 import { ProductListComponent } from './components/product-list/product-list';
@@ -12,7 +11,7 @@ import { OrderConfirmationComponent } from './components/order-confirmation/orde
   templateUrl: './app.html',
 })
 export class App {
-  products = PRODUCTS;
+  // products array removed — ProductListComponent sources data from ProductService directly
   cartService = inject(CartService);
   showModal = signal(false);
 
